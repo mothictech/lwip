@@ -294,6 +294,11 @@ typedef int ssize_t;
 #define LWIP_MEM_ALIGN(addr) ((void *)(((mem_ptr_t)(addr) + MEM_ALIGNMENT - 1) & ~(mem_ptr_t)(MEM_ALIGNMENT-1)))
 #endif
 
+#ifndef LWIP_MEM_FRAME_ALIGN
+#define LWIP_MEM_FRAME_ALIGN(addr) ((void *)(((mem_ptr_t)(addr) + MEM_FRAME_ALIGNMENT - 1) & ~(mem_ptr_t)(MEM_FRAME_ALIGNMENT-1)))
+#endif
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
