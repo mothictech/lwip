@@ -1911,6 +1911,7 @@ dhcp_create_msg(struct netif *netif, struct dhcp *dhcp, u8_t message_type, u16_t
                 ("dhcp_create_msg(): could not allocate pbuf\n"));
     return NULL;
   }
+  pbuf_add_header(p_out, 4);
   LWIP_ASSERT("dhcp_create_msg: check that first pbuf can hold struct dhcp_msg",
               (p_out->len >= sizeof(struct dhcp_msg)));
 
