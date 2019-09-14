@@ -991,7 +991,9 @@ ip4_output_if_opt_src(struct pbuf *p, const ip4_addr_t *src, const ip4_addr_t *d
 #else /* CHECKSUM_GEN_IP_INLINE */
     IPH_CHKSUM_SET(iphdr, 0);
 #if CHECKSUM_GEN_IP
-    IF__NETIF_CHECKSUM_ENABLED(netif, NETIF_CHECKSUM_GEN_IP) {
+    if(dest->addr == IPADDR_BROADCAST) {
+      IPH_CHKSUM_SET(iphdr, inet_chksum(iphdr, ip_hlen));
+    } else IF__NETIF_CHECKSUM_ENABLED(netif, NETIF_CHECKSUM_GEN_IP) {
       IPH_CHKSUM_SET(iphdr, inet_chksum(iphdr, ip_hlen));
     }
 #endif /* CHECKSUM_GEN_IP */
